@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Paciente } from 'src/app/shared/models/paciente';
+import { PacienteService } from 'src/app/shared/services/paciente/paciente.service';
 
 @Component({
   selector: 'app-paciente-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PacienteListComponent implements OnInit {
 
-  constructor() { }
+  listPaciente! : Paciente[];
+  constructor(private _pacienteService : PacienteService) { }
+
 
   ngOnInit(): void {
+    this.getPacientes();
+  }
+
+  getPacientes(){
+    this._pacienteService.getPacientes().subscribe(result => {
+      this.listPaciente = result;
+      console.log(this.listPaciente);
+    });
   }
 
 }
