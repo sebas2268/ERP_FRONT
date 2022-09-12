@@ -6,7 +6,7 @@ export interface Persona {
     fenacimiento:     Date;
     cdtipo:           string;
     cdgenero:         string;
-    feregistro:       Date;
+    feregistro?:       Date;
     febaja:           Date;
     cdusuario:        string;
     dsdireccion:      string;

@@ -28,7 +28,7 @@ export class PersonaService {
   }
 
   postPersona(persona:Persona):Observable<number>{
-    return this._http.post<number>(`${Connection.ENDPOINT}/Persona/${persona.nmid}`,persona);
+    return this._http.post<number>(`${Connection.ENDPOINT}/Persona`,persona);
   }
 
 }

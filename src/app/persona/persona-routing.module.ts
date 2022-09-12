@@ -4,13 +4,10 @@ import { CrearEditarPersonaComponent } from './crear-editar-persona/crear-editar
 import { PersonaListComponent } from './persona-list/persona-list.component';
 
 const routes: Routes = [
-  { path: '', component: PersonaListComponent, 
-    children:[
       { path: '', redirectTo: 'personaList', pathMatch: 'full' },
       { path: 'personaList', component: PersonaListComponent },
-      { path: 'crearPersona', component: CrearEditarPersonaComponent }  
-    ]
-  }
+      { path: 'crearPersona', component: CrearEditarPersonaComponent },
+      { path: 'editarPersona/:id', component: CrearEditarPersonaComponent }  
 ];
 
 @NgModule({

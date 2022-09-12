@@ -1,1 +1,126 @@
-<p>crear-editar-persona works!</p>
+<div *ngIf="spinner" class="spinner">
+    <mat-progress-spinner mode="indeterminate" class="spinnerKid" ></mat-progress-spinner>
+  </div>
+  
+  <div class="container" *ngIf="!spinner">
+    <mat-toolbar>
+      <span [innerText]="textForm"></span>
+      <div class="element-spacer"></div>
+      <a mat-mini-fab color="primary" routerLink="/personaList" aria-label="Example icon button with a delete icon">
+        <mat-icon matTooltip="Regresar">arrow_back</mat-icon>
+      </a>
+    </mat-toolbar>
+    <mat-card style="margin-top: 10px;">
+      <form [formGroup]="formPersona" autocomplete="off">
+        <mat-grid-list cols="4" rowHeight="60">
+          <mat-grid-tile colspan="4" rowspan="1">
+            <span style="font-size: 1.8em;">Información de la persona</span>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Documento</mat-label>
+              <input matInput formControlName="cddocumento" maxlength="20" [readonly]="ruta">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Nombres</mat-label>
+              <input matInput formControlName="dsnombres">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Apellidos</mat-label>
+              <input matInput formControlName="dsapellidos">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>cdtipo</mat-label>
+              <input matInput formControlName="cdtipo">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Codigo Usuario</mat-label>
+              <input matInput formControlName="cdusuario">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Direccion</mat-label>
+              <input matInput formControlName="dsdireccion">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Photo</mat-label>
+              <input matInput formControlName="dsphoto">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Teléfono</mat-label>
+              <input matInput formControlName="cdtelfono_fijo">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Movil</mat-label>
+              <input matInput formControlName="cdtelefono_movil">
+            </mat-form-field>
+          </mat-grid-tile>
+ 
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Correo Electronico</mat-label>
+              <input matInput placeholder="correo@correo.com" formControlName="dsemail">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field >
+              <input matInput formControlName="fenacimiento" [matDatepicker]="picker" placeholder="Fecha de Nacimento">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+              <mat-form-field appearance="fill" class="anchoInputForm">
+                <mat-label>Fecha de Baja</mat-label>
+                <input matInput [matDatepicker]="febaja">
+                <mat-datepicker-toggle matSuffix [for]="febaja"></mat-datepicker-toggle>
+                <mat-datepicker #febaja></mat-datepicker>
+              </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="4" rowspan="1">
+            <div *ngIf="ruta">
+              <button mat-raised-button color="primary"
+                (click)="editar()" [disabled] = formPersona.invalid>Editar</button> 
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="4" rowspan="1">
+            <div *ngIf="!ruta">
+              <button mat-raised-button color="primary"
+                (click)="crear()" [disabled] = formPersona.invalid>Crear</button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+  
+      </form>
+  
+    </mat-card>
+  
+  </div>
+  
+
