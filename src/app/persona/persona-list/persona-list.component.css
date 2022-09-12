@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+  }
+
+  .thPequeño{
+      width: 15%;
+  }
+
+  .container{
+      margin: 3%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .tdAcciones{
+    text-align:center;      
+  }
+
+  .pointer{
+    cursor: pointer;
+    color: black;
+  }
+
+  .div_acciones{
+    display: inline-block; 
+    width: 20%;
+  }

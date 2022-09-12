@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PacienteListComponent } from './paciente-list/paciente-list.component';
 import { PacienteRoutingModule } from './paciente-routing.module';
-
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +10,8 @@ import { PacienteRoutingModule } from './paciente-routing.module';
   ],
   imports: [
     CommonModule,
-    PacienteRoutingModule
+    PacienteRoutingModule,
+    SharedModule
   ]
 })
 export class PacienteModule { }
