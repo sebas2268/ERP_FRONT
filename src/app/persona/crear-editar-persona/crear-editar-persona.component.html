@@ -46,6 +46,13 @@
 
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
+              <mat-label>Genero</mat-label>
+              <input matInput formControlName="cdgenero">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
               <mat-label>Codigo Usuario</mat-label>
               <input matInput formControlName="cdusuario">
             </mat-form-field>
@@ -97,7 +104,7 @@
           <mat-grid-tile colspan="1" rowspan="1">
               <mat-form-field appearance="fill" class="anchoInputForm">
                 <mat-label>Fecha de Baja</mat-label>
-                <input matInput [matDatepicker]="febaja">
+                <input matInput formControlName="febaja" [matDatepicker]="febaja" placeholder="Fecha de Baja">
                 <mat-datepicker-toggle matSuffix [for]="febaja"></mat-datepicker-toggle>
                 <mat-datepicker #febaja></mat-datepicker>
               </mat-form-field>

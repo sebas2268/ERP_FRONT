@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Persona } from 'src/app/shared/models/persona';
 import { PersonaService } from 'src/app/shared/services/persona/persona.service';
+import { UtilitiesService } from 'src/app/shared/services/utilities.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class CrearEditarPersonaComponent implements OnInit {
 
+  
   nmid ?: string;
   textForm : string = "Editar Persona";
   spinner : boolean = false;
@@ -22,7 +24,8 @@ export class CrearEditarPersonaComponent implements OnInit {
   constructor(
       private _route : ActivatedRoute, 
       private fbPersona : FormBuilder,
-      private _personaService : PersonaService
+      private _personaService : PersonaService,
+      private _utilitiesService : UtilitiesService
       ) { 
     this.ruta = ("editarPersona" == this._route.snapshot.url[0].path);
     this.formPersona = fbPersona.group(
@@ -66,6 +69,12 @@ export class CrearEditarPersonaComponent implements OnInit {
     this._personaService.getPersona(Number(id)).subscribe(
       result => {
         this.formPersona.patchValue(result);
+        if(String(result.febaja) == '0001-01-01T00:00:00'){
+          this.formPersona.get("febaja")?.reset();
+        }
+       
+
+        //this.formPersona.get("febaja")?.setValue(this._utilitiesService.fechaCorta(result.febaja));
         this.persona = result;
         this.spinner = false;
       },
