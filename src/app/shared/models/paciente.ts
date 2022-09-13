@@ -1,3 +1,5 @@
+import { Persona } from "./persona";
+
 export interface Paciente {
     nmid:           number;
     nmid_persona:   number;
@@ -8,4 +10,6 @@ export interface Paciente {
     febaja:         Date;
     cdusuario:      string;
     dscondicion:    string;
+    nmidPersona:    Persona;
+    nmidMedicotra:  Persona;
 }
