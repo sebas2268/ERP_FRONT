@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Connection } from '../../connections';
+import { CreatePaciente } from '../../models/CreatePaciente';
 import { Paciente } from '../../models/paciente';
 
 @Injectable({
@@ -15,8 +16,8 @@ export class PacienteService {
     return this._http.get<Paciente[]>(`${Connection.ENDPOINT}/Paciente`);
   }
 
-  postPaciente(paciente:Paciente):Observable<number>{
-    return this._http.post<number>(`${Connection.ENDPOINT}/Paciente/${paciente.nmid}`,paciente);
+  postPaciente(paciente:CreatePaciente):Observable<number>{
+    return this._http.post<number>(`${Connection.ENDPOINT}/Paciente`,paciente);
   }
 
 }

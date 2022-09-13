@@ -20,7 +20,7 @@ export class PersonaService {
   }
 
   getPersonaDocumento(cddocumento:string):Observable<Persona>{
-    return this._http.get<Persona>(`${Connection.ENDPOINT}/cddocumento/${cddocumento}`);
+    return this._http.get<Persona>(`${Connection.ENDPOINT}/Persona/cddocumento/${cddocumento}`);
   }
 
   putPersona(persona:Persona):Observable<number>{

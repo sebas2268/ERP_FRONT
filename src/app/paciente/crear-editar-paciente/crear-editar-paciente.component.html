@@ -1,0 +1,113 @@
+<div class="container">
+    <mat-toolbar>
+      <span> Registrar Paciente</span>
+      <div class="element-spacer"></div>
+      <a mat-mini-fab color="primary" routerLink="/paciente/pacienteList" aria-label="Example icon button with a delete icon">
+        <mat-icon matTooltip="Regresar">arrow_back</mat-icon>
+      </a>
+    </mat-toolbar>
+    <mat-card style="margin-top: 10px;">
+      <form [formGroup]="formPaciente" autocomplete="off">
+        <mat-grid-list cols="3" rowHeight="60">
+          <mat-grid-tile colspan="3" rowspan="1">
+            <span style="font-size: 1.8em;">Informacion del paciente</span>
+          </mat-grid-tile>
+  
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Identificación paciente</mat-label>
+              <input matInput placeholder="" formControlName="cddocumento" (keyup)="buscarPersona($event.key)" #identificacion >
+              <mat-icon matSuffix (click)="buscarPersona('Enter')">search</mat-icon>
+              <mat-hint  *ngIf="formPaciente.controls['dsnombres'].invalid">Presione enter para buscar</mat-hint>
+            </mat-form-field>    
+          </mat-grid-tile>  
+          
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="anchoInputForm">
+              <mat-label>Nombres paciente</mat-label>
+              <input matInput placeholder="" formControlName="dsnombres" readonly>
+            </mat-form-field>    
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="1">          
+              <mat-form-field class="anchoInputForm">
+                <mat-label>Apellidos paciente</mat-label>
+                <input matInput formControlName="dsapellidos" readonly>
+              </mat-form-field>         
+          </mat-grid-tile>
+          
+          <div *ngIf="formPaciente.controls['dsnombres'].valid">
+            <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field class="anchoInputForm">
+                  <mat-label>Identificación médico</mat-label>
+                  <input matInput placeholder="" formControlName="cddocumentoMedicotra" (keyup)="buscarMedico($event.key)" #identificacion >
+                  <mat-icon matSuffix (click)="buscarMedico('Enter')">search</mat-icon>
+                  <mat-hint  *ngIf="formPaciente.controls['dsnombresMedicotra'].invalid">Presione enter para buscar</mat-hint>
+                </mat-form-field>    
+              </mat-grid-tile>  
+              
+              <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field class="anchoInputForm">
+                  <mat-label>Nombres médico</mat-label>
+                  <input matInput placeholder="" formControlName="dsnombresMedicotra" readonly>
+                </mat-form-field>    
+              </mat-grid-tile>
+              
+              <mat-grid-tile colspan="1" rowspan="1">          
+                  <mat-form-field class="anchoInputForm">
+                    <mat-label>Apellidos médico</mat-label>
+                    <input matInput formControlName="dsapellidosMedicotra" readonly>
+                  </mat-form-field>         
+              </mat-grid-tile>
+          </div>
+
+          <div *ngIf="formPaciente.controls['dsnombresMedicotra'].valid">
+            <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field class="anchoInputForm">
+                  <mat-label>EPS</mat-label>
+                  <input matInput placeholder="" formControlName="dseps">
+                </mat-form-field>    
+              </mat-grid-tile>
+              
+              <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field class="anchoInputForm">
+                  <mat-label>ARL</mat-label>
+                  <input matInput placeholder="" formControlName="dsarl">
+                </mat-form-field>    
+              </mat-grid-tile>
+              
+              <mat-grid-tile colspan="1" rowspan="1">          
+                  <mat-form-field class="anchoInputForm">
+                    <mat-label>Código usuario</mat-label>
+                    <input matInput formControlName="cdusuario">
+                  </mat-form-field>         
+              </mat-grid-tile>
+
+              <mat-grid-tile colspan="1" rowspan="1">          
+                <mat-form-field class="anchoInputForm">
+                  <mat-label>Condición</mat-label>
+                  <input matInput formControlName="dscondicion">
+                </mat-form-field>         
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field appearance="fill" class="anchoInputForm">
+                  <mat-label>Fecha de Baja</mat-label>
+                  <input matInput formControlName="febaja" [matDatepicker]="febaja" placeholder="Fecha de Baja">
+                  <mat-datepicker-toggle matSuffix [for]="febaja"></mat-datepicker-toggle>
+                  <mat-datepicker #febaja></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+          </div>
+  
+          <mat-grid-tile colspan="3" rowspan="1">
+            <div>
+              <button mat-raised-button color="primary" [disabled]="formPaciente.invalid"
+                (click)="crear()">Guardar</button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </mat-card>
+  </div>
+  
