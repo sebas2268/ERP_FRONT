@@ -60,8 +60,6 @@ export class CrearEditarPacienteComponent implements OnInit {
       cdusuario: this.formPaciente.value.cdusuario
     }
 
-    console.log(paciente);
-
     this._pacienteServices.postPaciente(paciente).subscribe(
       result => {
         Swal.fire("Paciente registrado correctamente")
@@ -79,7 +77,7 @@ export class CrearEditarPacienteComponent implements OnInit {
     if (tecla === "Enter") {
       this._personaServices.getPersonaDocumento(this.formPaciente.value.cddocumento).subscribe(
         result => {
-          this.paciente = result;
+          this.paciente = result;         
           this.nmid_persona = this.paciente.nmid;
           this.formPaciente.get("dsnombres")?.setValue(this.paciente.dsnombres);
           this.formPaciente.get("dsapellidos")?.setValue(this.paciente.dsapellidos);
@@ -96,6 +94,9 @@ export class CrearEditarPacienteComponent implements OnInit {
       this._personaServices.getPersonaDocumento(this.formPaciente.value.cddocumentoMedicotra).subscribe(
         result => {
           this.paciente = result;
+          if(this.paciente.cdtipo !== "Trabajador"){
+            Swal.fire("El documento ingresado no corresponde a un médico, es un: ", this.paciente.cdtipo)
+          }
           this.nmid_medicotra = this.paciente.nmid;
           this.formPaciente.get("dsnombresMedicotra")?.setValue(this.paciente.dsnombres);
           this.formPaciente.get("dsapellidosMedicotra")?.setValue(this.paciente.dsapellidos);
