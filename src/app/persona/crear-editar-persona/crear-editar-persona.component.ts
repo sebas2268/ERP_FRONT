@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DataMaestra } from 'src/app/shared/models/DataMaestra';
 import { Persona } from 'src/app/shared/models/persona';
+import { DataMestraService } from 'src/app/shared/services/datoMaestros/dato-mestro.service';
 import { PersonaService } from 'src/app/shared/services/persona/persona.service';
 import { UtilitiesService } from 'src/app/shared/services/utilities.service';
 import Swal from 'sweetalert2';
@@ -13,19 +15,21 @@ import Swal from 'sweetalert2';
 })
 export class CrearEditarPersonaComponent implements OnInit {
 
-  
   nmid ?: string;
   textForm : string = "Editar Persona";
   spinner : boolean = false;
   ruta : boolean;
   formPersona : FormGroup;
   persona! : Persona;
+  tipoPersona! : DataMaestra[];
+  generoPersona! : DataMaestra[];
+
 
   constructor(
       private _route : ActivatedRoute, 
       private fbPersona : FormBuilder,
       private _personaService : PersonaService,
-      private _utilitiesService : UtilitiesService
+      private _dataMestraService : DataMestraService
       ) { 
     this.ruta = ("editarPersona" == this._route.snapshot.url[0].path);
     this.formPersona = fbPersona.group(
@@ -42,13 +46,16 @@ export class CrearEditarPersonaComponent implements OnInit {
         dsdireccion      :[''],
         dsphoto          :[''],
         cdtelfono_fijo   :[''],
-        cdtelefono_movil :[''],
-        dsemail          :[''],
+        cdtelefono_movil :['',[Validators.minLength(10), Validators.pattern('[3]\\d{9}')]],
+        dsemail          :['',[ Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       }
     );
   }
 
+
+
   ngOnInit(): void {
+    this.getDataMaestra();
     this.configuracion();
   }
 
@@ -64,6 +71,28 @@ export class CrearEditarPersonaComponent implements OnInit {
     }
   }
 
+  getDataMaestra()
+  {
+    this.spinner = true;
+    this._dataMestraService.getDataMaestra().subscribe(
+      result => {
+        this.tipoPersona = result.filter(tpersona => {
+          return tpersona.nmmaestro == "tipoPersona";
+        });
+
+        this.generoPersona = result.filter(gpersona => {
+          return gpersona.nmmaestro == "generoPersona";
+        });
+
+        this.spinner = false;
+      },
+      error => {
+        Swal.fire("Ocurrio el siguiente error:", error.error.detail)
+        this.spinner = false;
+      }
+    );
+  }
+
   getPersona(id:string)
   {
     this._personaService.getPersona(Number(id)).subscribe(
@@ -72,9 +101,6 @@ export class CrearEditarPersonaComponent implements OnInit {
         if(String(result.febaja) == '0001-01-01T00:00:00'){
           this.formPersona.get("febaja")?.reset();
         }
-       
-
-        //this.formPersona.get("febaja")?.setValue(this._utilitiesService.fechaCorta(result.febaja));
         this.persona = result;
         this.spinner = false;
       },

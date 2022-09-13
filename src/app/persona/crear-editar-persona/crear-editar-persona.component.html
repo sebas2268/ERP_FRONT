@@ -39,28 +39,36 @@
 
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
-              <mat-label>cdtipo</mat-label>
-              <input matInput formControlName="cdtipo">
+              <mat-label>Tipo persona</mat-label>
+              <mat-select formControlName="cdtipo">
+                <mat-option *ngFor="let tPersona of tipoPersona" [value]="tPersona.nmdato">
+                  {{tPersona.nmdato}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
-              <mat-label>Genero</mat-label>
-              <input matInput formControlName="cdgenero">
+              <mat-label>Género</mat-label>
+              <mat-select formControlName="cdgenero">
+                <mat-option *ngFor="let gPersona of generoPersona" [value]="gPersona.nmdato">
+                  {{gPersona.nmdato}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
-              <mat-label>Codigo Usuario</mat-label>
+              <mat-label>Código Usuario</mat-label>
               <input matInput formControlName="cdusuario">
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
-              <mat-label>Direccion</mat-label>
+              <mat-label>Dirección</mat-label>
               <input matInput formControlName="dsdireccion">
             </mat-form-field>
           </mat-grid-tile>
@@ -81,15 +89,18 @@
 
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
-              <mat-label>Movil</mat-label>
+              <mat-label>Teléfono Móvil</mat-label>
               <input matInput formControlName="cdtelefono_movil">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['cdtelefono_movil'].invalid">Ingrese un número de celular valido</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
+
  
           <mat-grid-tile colspan="1" rowspan="1">
             <mat-form-field class="anchoInputForm">
               <mat-label>Correo Electronico</mat-label>
               <input matInput placeholder="correo@correo.com" formControlName="dsemail">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['dsemail'].invalid">Ingrese un correo electronico valido</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -113,7 +124,7 @@
           <mat-grid-tile colspan="4" rowspan="1">
             <div *ngIf="ruta">
               <button mat-raised-button color="primary"
-                (click)="editar()" [disabled] = formPersona.invalid>Editar</button> 
+                (click)="editar()" [disabled] = formPersona.invalid>Actualizar</button> 
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="4" rowspan="1">
