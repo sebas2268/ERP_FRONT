@@ -40,7 +40,7 @@
   
         <ng-container matColumnDef="feregistro">
           <th mat-header-cell *matHeaderCellDef> Fecha registro </th>
-          <td mat-cell *matCellDef="let element"> {{element.feregistro}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.feregistro | date:'dd-MM-yyyy'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="cdtelfono_fijo">

@@ -47,12 +47,12 @@
 
         <ng-container matColumnDef="feregistro">
           <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
-          <td mat-cell *matCellDef="let element"> {{element.feregistro}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.feregistro | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="febaja">
           <th mat-header-cell *matHeaderCellDef> Fecha Baja </th>
-          <td mat-cell *matCellDef="let element"> {{element.febaja}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.febaja | date:'dd-MM-yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="cdusuario">

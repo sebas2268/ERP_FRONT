@@ -30,16 +30,16 @@ export class CrearEditarPacienteComponent implements OnInit {
     this.formPaciente = fbPaciente.group(
       {
         cddocumento             :['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
-        dsnombres               :['', Validators.required],
-        dsapellidos             :[''],
+        dsnombres               :['',Validators.compose([Validators.required, Validators.maxLength(60)])],
+        dsapellidos             :['',Validators.maxLength(60)],
         cddocumentoMedicotra    :['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
         dsnombresMedicotra      :['', Validators.required],
         dsapellidosMedicotra    :[''],
-        dseps                   :[''],
-        dsarl                   :[''],
+        dseps                   :['',Validators.maxLength(50)],
+        dsarl                   :['',Validators.maxLength(50)],
         febaja                  :[''],
-        cdusuario               :[''],
-        dscondicion             :[''],
+        cdusuario               :['',Validators.maxLength(150)],
+        dscondicion             :['',Validators.maxLength(500)],
       }
     );
   }
@@ -87,6 +87,11 @@ export class CrearEditarPacienteComponent implements OnInit {
         }
       )
     }
+    else
+    {
+      this.formPaciente.controls["dsnombres"].reset();
+      this.formPaciente.controls["dsapellidos"].reset();
+    }
   }
 
   buscarMedico(tecla : any){
@@ -97,14 +102,22 @@ export class CrearEditarPacienteComponent implements OnInit {
           if(this.paciente.cdtipo !== "Trabajador"){
             Swal.fire("El documento ingresado no corresponde a un médico, es un: ", this.paciente.cdtipo)
           }
-          this.nmid_medicotra = this.paciente.nmid;
-          this.formPaciente.get("dsnombresMedicotra")?.setValue(this.paciente.dsnombres);
-          this.formPaciente.get("dsapellidosMedicotra")?.setValue(this.paciente.dsapellidos);
+          else
+          {
+            this.nmid_medicotra = this.paciente.nmid;
+            this.formPaciente.get("dsnombresMedicotra")?.setValue(this.paciente.dsnombres);
+            this.formPaciente.get("dsapellidosMedicotra")?.setValue(this.paciente.dsapellidos);
+          }
         },
         error => {
           console.log(error);
         }
       )
+    }
+    else
+    {
+      this.formPaciente.controls["dsnombresMedicotra"].reset();
+      this.formPaciente.controls["dsapellidosMedicotra"].reset();
     }
   }
 

@@ -5,7 +5,6 @@ import { DataMaestra } from 'src/app/shared/models/DataMaestra';
 import { Persona } from 'src/app/shared/models/persona';
 import { DataMestraService } from 'src/app/shared/services/datoMaestros/dato-mestro.service';
 import { PersonaService } from 'src/app/shared/services/persona/persona.service';
-import { UtilitiesService } from 'src/app/shared/services/utilities.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -35,24 +34,22 @@ export class CrearEditarPersonaComponent implements OnInit {
     this.formPersona = fbPersona.group(
       {
         cddocumento      :[{value:'', disabled: this.ruta}, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
-        dsnombres        :['',Validators.required],
-        dsapellidos      :[''],
+        dsnombres        :['',Validators.compose([Validators.required, Validators.maxLength(60)])],
+        dsapellidos      :['',Validators.maxLength(60)],
         fenacimiento     :['',Validators.required],
         cdtipo           :[''],
         cdgenero         :[''],
         feregistro       :[''],
         febaja           :[''],
-        cdusuario        :[''],
-        dsdireccion      :[''],
-        dsphoto          :[''],
-        cdtelfono_fijo   :[''],
-        cdtelefono_movil :['',[Validators.minLength(10), Validators.pattern('[3]\\d{9}')]],
+        cdusuario        :['',Validators.maxLength(150)],
+        dsdireccion      :['',Validators.maxLength(200)],
+        dsphoto          :['',Validators.maxLength(500)],
+        cdtelfono_fijo   :['',Validators.maxLength(20)],
+        cdtelefono_movil :['',[Validators.pattern('[3]\\d{9}')]],
         dsemail          :['',[ Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       }
     );
   }
-
-
 
   ngOnInit(): void {
     this.getDataMaestra();

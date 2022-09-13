@@ -32,7 +32,6 @@ export class PacienteListComponent implements OnInit {
   getPacientes(){
     this._pacienteService.getPacientes().subscribe(result => {
       this.normalizarDatosTabla(result);
-      console.log(this.listPaciente);
     });
   }
 

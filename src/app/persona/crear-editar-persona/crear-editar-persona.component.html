@@ -34,6 +34,7 @@
             <mat-form-field class="anchoInputForm">
               <mat-label>Apellidos</mat-label>
               <input matInput formControlName="dsapellidos">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['dsapellidos'].invalid">Máximo 60 caracteres</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -63,6 +64,7 @@
             <mat-form-field class="anchoInputForm">
               <mat-label>Código Usuario</mat-label>
               <input matInput formControlName="cdusuario">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['cdusuario'].invalid">Máximo 150 caracteres</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -70,6 +72,7 @@
             <mat-form-field class="anchoInputForm">
               <mat-label>Dirección</mat-label>
               <input matInput formControlName="dsdireccion">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['dsdireccion'].invalid">Máximo 200 caracteres</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -77,6 +80,7 @@
             <mat-form-field class="anchoInputForm">
               <mat-label>Photo</mat-label>
               <input matInput formControlName="dsphoto">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['dsphoto'].invalid">Máximo 500 caracteres</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -84,6 +88,7 @@
             <mat-form-field class="anchoInputForm">
               <mat-label>Teléfono</mat-label>
               <input matInput formControlName="cdtelfono_fijo">
+              <mat-hint class="errorColor" *ngIf="formPersona.controls['cdtelfono_fijo'].invalid">Máximo 20 caracteres</mat-hint>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -140,5 +145,3 @@
     </mat-card>
   
   </div>
-  
-
